@@ -1,0 +1,100 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reverse geocoding</title>
+  <link href="https://docs.maptiler.com/styles/base.css" rel="stylesheet">
+  <link href="https://cdn.maptiler.com/maptiler-geocoding-control/v0.0.98/style.css" rel="stylesheet">
+  <link href="https://cdn.maptiler.com/maptiler-sdk-js/v1.1.1/maptiler-sdk.css" rel="stylesheet" />
+  <script src="https://cdn.maptiler.com/maptiler-sdk-js/v1.1.1/maptiler-sdk.umd.min.js"></script>
+  <script src="https://cdn.maptiler.com/maptiler-geocoding-control/v0.0.98/maptilersdk.umd.js"></script>
+  
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+    }
+
+    .coordinates {
+      position: relative;
+      top: 5px;
+      left: 5px;
+      z-index: 1000;
+      width: fit-content;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+  <div class="coordinates">
+    <div class="mb-1">
+      <input type="text" class="form-control" id="lat" placeholder="Latitude" aria-label="Latitude">
+    </div>
+    <div class="mb-1">
+      <input type="text" class="form-control" id="lng" placeholder="Longitude" aria-label="Longitude">
+    </div>
+    <div>
+      <button type="button" id="btn-search-reverse" class="btn btn-primary">Search</button>
+    </div>
+  </div>
+  <div id="results"></div>
+  <script>
+    maptilersdk.config.apiKey = 'uEMGFcQ7SCaZtHPbUkji';
+
+    const map = new maptilersdk.Map({
+      container: 'map',
+      style: maptilersdk.MapStyle.STREETS,
+      geolocate: maptilersdk.GeolocationType.POINT
+    });
+    const gc = new maptilersdkMaptilerGeocoder.GeocodingControl();
+    map.addControl(gc, 'top-right');
+    map.on('click', async (e) => {
+      const { lng, lat } = e.lngLat;
+      document.getElementById('lat').value = lat;
+      document.getElementById('lng').value = lng;
+      reverseGeocoding(lng, lat);
+    });
+
+    map.on('load', function () {
+      const { lng, lat } = map.getCenter();
+      document.getElementById('lat').value = lat;
+      document.getElementById('lng').value = lng;
+      reverseGeocoding(lng, lat);
+    });
+
+    document.getElementById('btn-search-reverse').addEventListener('click', function () {
+      const lng = parseFloat(document.getElementById('lng').value);
+      const lat = parseFloat(document.getElementById('lat').value);
+      reverseGeocoding(lng, lat);
+    });
+
+    let marker;
+
+    async function reverseGeocoding(lng, lat) {
+        if (marker) {
+          marker.setLngLat([lng, lat]);
+        } else {
+          marker = new maptilersdk.Marker()
+            .setLngLat([lng, lat])
+            .addTo(map);
+        }
+        map.flyTo({
+          center: [lng,lat],
+          essential: true 
+        });
+    }
+
+  </script>
+</body>
+
+</html> -->
