@@ -5,7 +5,7 @@ function PropertySearch() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResult, setSearchResult] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
-  
+
   const handleSearchInputChange = (event) => {
     const newSearchTerm = event.target.value;
     setSearchTerm(newSearchTerm);
@@ -14,8 +14,10 @@ function PropertySearch() {
     setSuggestions(suggestedProperties);
   };
 
-  const handleSearch = () => {
-    const result = searchPropertyByName(searchTerm);
+  const handleSuggestionClick = (suggestion) => {
+    setSearchTerm(suggestion);
+    setSuggestions([]); // Clear the suggestions
+    const result = searchPropertyByName(suggestion); // Search for the property immediately
     setSearchResult(result);
   };
 
@@ -34,11 +36,6 @@ function PropertySearch() {
     return filteredProperties.map((property) => property.propertyName);
   };
 
-  const handleSuggestionClick = (suggestion) => {
-    setSearchTerm(suggestion);
-    setSuggestions([]);
-  };
-
   return (
     <div>
       <h1>Property Search</h1>
@@ -49,7 +46,6 @@ function PropertySearch() {
           value={searchTerm}
           onChange={handleSearchInputChange}
         />
-        <button onClick={handleSearch}>Tìm kiếm</button>
         <div>
           <ul>
             {suggestions.map((suggestion, index) => (
